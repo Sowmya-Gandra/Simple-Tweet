@@ -24,8 +24,8 @@ import com.github.scribejava.core.builder.api.BaseApi;
 public class TwitterClient extends OAuthBaseClient {
 	public static final BaseApi REST_API_INSTANCE = TwitterApi.instance();
 	public static final String REST_URL = "https://api.twitter.com/1.1";
-	public static final String REST_CONSUMER_KEY = "DYBFMGttJZTBYCfZVzFPO9h7r";       // Change this inside apikey.properties
-	public static final String REST_CONSUMER_SECRET = "nhwCMQbv9DpBDuL8GOdTzbMT5C1ycRI8ZngvH375nI11TwJ51M"; // Change this inside apikey.properties
+	public static final String REST_CONSUMER_KEY = "LchrGd4jwHAhnIA1F9xDeFkKP";       // Change this inside apikey.properties
+	public static final String REST_CONSUMER_SECRET = "uPnUKD6cMWfzoKEQIE11SAU6asd9ZtA4Xp6JoKhjKbg6y7e6NN"; // Change this inside apikey.properties
 
 	// Landing page to indicate the OAuth flow worked in case Chrome for Android 25+ blocks navigation back to the app.
 	public static final String FALLBACK_URL = "https://codepath.github.io/android-rest-client-template/success.html";
@@ -60,6 +60,14 @@ public class TwitterClient extends OAuthBaseClient {
 		params.put("count", 25);
 		params.put("max_id", maxId);
 		client.get(apiUrl, params, handler);
+	}
+
+	public void publishTweet(String tweetContent,JsonHttpResponseHandler handler) {
+		String apiUrl = getApiUrl("statuses/update.json");
+		// Can specify query string params directly or through RequestParams.
+		RequestParams params = new RequestParams();
+		params.put("status",tweetContent);
+		client.post(apiUrl, params,"", handler);
 	}
 
 
